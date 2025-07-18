@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Invitados</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Control de Ingreso - Boda</h1>
+    <form id="formNuevo">
+      <input type="text" id="nuevoNombre" placeholder="Nuevo invitado" required />
+      <button type="submit">Agregar</button>
+    </form>
+  </header>
+
+  <main>
+    <ul id="listaInvitados">
+      <!-- Aquí se insertan los invitados con JS -->
+    </ul>
+  </main>
+
+  <div id="contadorFlotante">
+    <p>✔ Llegaron: <span id="contadorLlegaron">0</span></p>
+    <p>🕒 Aún no: <span id="contadorPendientes">0</span></p>
+    <p>➕ Nuevos: <span id="contadorNuevos">0</span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
