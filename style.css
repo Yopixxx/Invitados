@@ -61,3 +61,29 @@ li.llego {
   box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
   border-radius: 10px;
 }
+
+#contadorTotal.gris {
+  color: #666;
+  font-weight: bold;
+}
+
+#contadorTotal.verde {
+  color: green;
+  font-weight: bold;
+}
+
+#contadorTotal.naranja {
+  color: orange;
+  font-weight: bold;
+}
+
+#contadorTotal.rojo {
+  color: red;
+  font-weight: bold;
+}
+
+li.nuevo {
+  background-color: #ffe0b2; /* naranja claro */
+  color: #e65100;            /* texto naranja oscuro */
+  font-weight: bold;
+}
