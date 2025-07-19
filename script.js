@@ -1,94 +1,111 @@
-const invitadosIniciales = [
-  "Juan Pérez",
-  "María López",
-  "Carlos Díaz",
-  "Ana Torres"
-];
+// const lista = document.getElementById("lista");
+// const form = document.getElementById("form");
+// const input = document.getElementById("nombre");
+// const totalSpan = document.getElementById("total");
+// const llegadosSpan = document.getElementById("llegados");
+// const nuevosSpan = document.getElementById("nuevos");
+// const aunNoSpan = document.getElementById("aunno");
 
-let contadorNuevos = 0;
+// let aforoMaximo = 150;
+// let nuevosContador = 1;
 
-const listaInv = document.getElementById("listaInvitados");
-const llegados = document.getElementById("contadorLlegaron");
-const pendientes = document.getElementById("contadorPendientes");
-const nuevos = document.getElementById("contadorNuevos");
+// function actualizarContadores() {
+//   const items = document.querySelectorAll(".item");
+//   const total = items.length;
+//   const llegados = [...items].filter(item => item.classList.contains("llego")).length;
+//   const nuevos = [...items].filter(item => item.classList.contains("nuevo")).length;
+//   const aunNo = total - llegados - nuevos;
 
-function crearItem(nombre, esNuevo = false) {
-  const li = document.createElement("li");
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
+//   totalSpan.textContent = total;
+//   llegadosSpan.textContent = llegados;
+//   nuevosSpan.textContent = nuevos;
+//   aunNoSpan.textContent = aunNo;
 
-  const span = document.createElement("span");
+//   // Cambia el color del aforo
+//   const color = total <= 100 ? "green" : (total <= aforoMaximo ? "orange" : "red");
+//   totalSpan.style.color = color;
+// }
 
-  if (esNuevo) {
-    contadorNuevos++;
-    nombre += " " + contadorNuevos;
-    li.classList.add("nuevo");
-  }
+// function crearItem(nombre, esNuevo = false, yaLlego = false) {
+//   const div = document.createElement("div");
+//   div.classList.add("item");
+//   if (esNuevo) {
+//     div.classList.add("nuevo");
+//     nombre = `${nombre} ${nuevosContador++}`;
+//   }
+//   const checkbox = document.createElement("input");
+//   checkbox.type = "checkbox";
+//   checkbox.checked = esNuevo || yaLlego;
+//   const label = document.createElement("label");
+//   label.textContent = nombre;
 
-  span.textContent = nombre;
+//   if (checkbox.checked) {
+//     div.classList.add("llego");
+//     div.style.color = esNuevo ? "orange" : "green";
+//   } else {
+//     div.style.color = "gray";
+//   }
 
-  checkbox.addEventListener("change", () => {
-    li.classList.toggle("llego", checkbox.checked);
-    actualizarContadores();
-  });
+//   checkbox.addEventListener("change", () => {
+//     div.classList.toggle("llego", checkbox.checked);
+//     div.style.color = checkbox.checked
+//       ? (div.classList.contains("nuevo") ? "orange" : "green")
+//       : "gray";
+//     guardarEstado();
+//     actualizarContadores();
+//   });
 
-  li.appendChild(checkbox);
-  li.appendChild(span);
-  listaInv.appendChild(li);
+//   div.appendChild(checkbox);
+//   div.appendChild(label);
+//   lista.appendChild(div);
+// }
 
-  actualizarContadores();
-}
+// function guardarEstado() {
+//   const datos = [];
+//   document.querySelectorAll(".item").forEach(div => {
+//     const label = div.querySelector("label").textContent;
+//     const checked = div.querySelector("input").checked;
+//     const esNuevo = div.classList.contains("nuevo");
+//     datos.push({ nombre: label, check: checked, nuevo: esNuevo });
+//   });
+//   localStorage.setItem("invitados", JSON.stringify(datos));
+// }
 
-function actualizarContadores() {
-  const items = listaInv.children;
-  let totalIniciales = 0;
-  let pendientesIniciales = 0;
-  let llegadosCount = 0;
+// function cargarDesdeStorage() {
+//   const data = JSON.parse(localStorage.getItem("invitados") || "[]");
+//   data.forEach(({ nombre, check, nuevo }) => {
+//     if (nuevo) {
+//       nuevosContador = Math.max(nuevosContador, parseInt(nombre.split(" ").slice(-1)[0]) + 1);
+//     }
+//     crearItem(nombre, nuevo, check);
+//   });
+//   actualizarContadores();
+// }
 
-  for (let item of items) {
-    const checkbox = item.querySelector("input[type=checkbox]");
+// function cargarDesdeTXT() {
+//   fetch("listainvitados.txt")
+//     .then(resp => resp.text())
+//     .then(text => {
+//       const nombres = text.split("\n").map(n => n.trim()).filter(n => n);
+//       nombres.forEach(nombre => crearItem(nombre, false, false));
+//       guardarEstado();
+//       actualizarContadores();
+//     });
+// }
 
-    if (checkbox.checked) {
-      llegadosCount++;
-    }
+// if (localStorage.getItem("listainvitados")) {
+//   cargarDesdeStorage();
+// } else {
+//   cargarDesdeTXT();
+// }
 
-    if (!item.classList.contains("nuevo")) {
-      totalIniciales++;
-      if (!checkbox.checked) {
-        pendientesIniciales++;
-      }
-    }
-  }
-
-  llegados.textContent = llegadosCount;
-  pendientes.textContent = pendientesIniciales;
-  nuevos.textContent = contadorNuevos;
-
-  // Aforo
-  const aforoSpan = document.getElementById("contadorTotal");
-  aforoSpan.textContent = llegadosCount;
-  aforoSpan.classList.remove("gris", "verde", "naranja", "rojo");
-
-  if (llegadosCount < 100) {
-    aforoSpan.classList.add("gris");
-  } else if (llegadosCount < 150) {
-    aforoSpan.classList.add("verde");
-  } else if (llegadosCount < 160) {
-    aforoSpan.classList.add("naranja");
-  } else {
-    aforoSpan.classList.add("rojo");
-  }
-}
-
-// Agregar los iniciales
-invitadosIniciales.forEach(nombre => crearItem(nombre));
-
-// Formulario de nuevos
-document.getElementById("formNuevo").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const nuevo = document.getElementById("nuevoNombre");
-  if (nuevo.value.trim() !== "") {
-    crearItem(nuevo.value.trim(), true);
-    nuevo.value = "";
-  }
-});
+// form.addEventListener("submit", e => {
+//   e.preventDefault();
+//   const nombre = input.value.trim();
+//   if (nombre) {
+//     crearItem(nombre, true, true);
+//     guardarEstado();
+//     actualizarContadores();
+//     input.value = "";
+//   }
+// });

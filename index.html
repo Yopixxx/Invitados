@@ -2,32 +2,96 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de Invitados</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sube tus fotos - Nuestra Boda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background-color: #fff8f3;
+      color: #444;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: 0 auto;
+      background-color: #fdf5f1;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 2rem 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #8b5e3c;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #5a4a42;
+      margin-bottom: 1.5rem;
+    }
+
+    .qr {
+      width: 250px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #8b5e3c;
+      color: white;
+      text-decoration: none;
+      border-radius: 2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #a1704c;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #c0b3a9;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Control de Ingreso - Boda</h1>
-    <form id="formNuevo">
-      <input type="text" id="nuevoNombre" placeholder="Nuevo invitado" required />
-      <button type="submit">Agregar</button>
-    </form>
-  </header>
+  <div class="container">
+    <h1>¡Comparte tus fotos con nosotros!</h1>
+    <p>Escanea el código QR o haz clic en el botón para subir tus fotos a nuestra carpeta de Google Drive.</p>
 
-  <main>
-    <ul id="listaInvitados">
-      <!-- Aquí se insertan los invitados con JS -->
-    </ul>
-  </main>
+    <img src="assets/QR.jpeg" alt="Código QR" class="qr" />
 
-  <div id="contadorFlotante">
-    <p>✔ Llegaron: <span id="contadorLlegaron">0</span></p>
-    <p>🕒 Aún no: <span id="contadorPendientes">0</span></p>
-    <p>➕ Nuevos: <span id="contadorNuevos">0</span></p>
-    <p>🎯 Aforo total: <span id="contadorTotal" class="gris">0</span></p>
+    <br>
+
+    <a href="https://drive.google.com/drive/folders/1T_rii9cM3Fxr3vpdvjGKvSyf3l-vzBH7?usp=sharing" target="_blank" class="button">
+      Subir Fotos
+    </a>
+
+    <footer>
+      Gracias por formar parte de este día tan especial 💕
+    </footer>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
